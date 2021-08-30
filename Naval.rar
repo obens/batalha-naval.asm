@@ -1,0 +1,51 @@
+
+	campo: 			.word 		0, 0, 0, 0, 0, 0, 0, 0, 0,			#Fique a vontade para inserir bombas manualmente na matriz à esquerda		0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 9, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 9, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0
+						
+						
+
+
+
+
+.text
+	
+main: 	
+	li $v0, 4
+	la $a0, bemVindo								#mensagem inicio do jogo
+	syscall
+	
+	li $v0, 4
+	la $a0, facil									#mensagem opção facil
+	syscall
+	
+	li $v0, 4
+	la $a0, medio									#mensagem opção medio
+	syscall
+	
+	li $v0, 4
+	la $a0, dificil									#mensagem opção dificil
+	syscall
+	
+	li $v0, 5									#lê a dificuldade selecionada
+	syscall
+	move $t0, $v0									#move o valor de entrada do usuário para $t0
+	
+	bne $t0, 1, branchMedio								#se a dificuldade selecionada é 1, a dimensão da matriz será 5
+		addi $t0, $zero, 5							#coloca $t0 como valor 5
+		j EndDificult
+	branchMedio:
+	bne $t0, 2, branchDificil							#se a dificuldade selecionada é 2, a dimensão da matriz será 7
+		addi $t0, $zero, 7							#coloca $t0 como valor 7
+		j EndDificult
+	branchDificil:
+	bne $t0, 3, EndDificult								#se a dificuldade selecionada é 3, a dimensão da matriz será 10
+		addi $t0, $zero, 10							#coloca $t0 como valor 10
+		j EndDificult
+	EndDificult
